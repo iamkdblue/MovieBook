@@ -3,7 +3,9 @@ package com.bms.moviebook.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bms.moviebook.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
 

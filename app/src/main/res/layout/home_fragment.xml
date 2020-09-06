@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/header_background"
-        tools:context=".HomeFragment">
+        tools:context=".ui.home.HomeFragment">
 
         <TextView
             android:id="@+id/tvHeader"
@@ -63,16 +63,28 @@
 
         </LinearLayout>
 
+        <!--i am setting background to
+         Materialcard in HomeFragment,
+         because background corner radius is not working here-->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/home_card_rounded_corners"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llSearchBar">
+            app:layout_constraintTop_toBottomOf="@id/llSearchBar"
+            tools:background="@drawable/home_card_rounded_corners">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovies"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_16sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_home_video_list" />
 
         </com.google.android.material.card.MaterialCardView>
 

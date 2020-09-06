@@ -14,4 +14,8 @@
     <color name="grey">#DADADA</color>
     <color name="color_text_light">#666D7E</color>
     <color name="card_background">#283546</color>
+
+    <color name="rating_normal">#CDC208</color>
+    <color name="rating_activated">#FBD533</color>
+
 </resources>

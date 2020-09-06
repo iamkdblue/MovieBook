@@ -3,7 +3,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/titleFragment"
-        android:name="com.bms.moviebook.HomeFragment"
+        android:name="com.bms.moviebook.ui.home.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </layout>
