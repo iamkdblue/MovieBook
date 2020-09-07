@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieBook</string>
+    <string name="searchbar_hint">Search Movie Here</string>
 </resources>

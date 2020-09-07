@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -55,6 +57,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun initViews() {
+
         binding.viewModel = viewModel
         binding.item = args.movie
         binding.materialCard.setBackgroundResource(R.drawable.home_card_rounded_corners)

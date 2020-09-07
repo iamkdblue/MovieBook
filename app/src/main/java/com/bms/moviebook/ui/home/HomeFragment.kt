@@ -59,14 +59,16 @@ class HomeFragment : Fragment() {
         viewModel.videoResponse.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
+                    binding.pbLoading.visibility = View.GONE
                     homeMovieListAdapter = HomeMovieListAdapter()
                     homeMovieListAdapter.setData(it.data!!)
                     binding.rvMovies.adapter = homeMovieListAdapter
                 }
                 Status.LOADING -> {
-                    //requireContext().toast("LOADING")
+                    binding.pbLoading.visibility = View.VISIBLE
                 }
                 Status.ERROR -> {
+                    binding.pbLoading.visibility = View.VISIBLE
                     requireContext().toast(it.message.toString())
                 }
             }

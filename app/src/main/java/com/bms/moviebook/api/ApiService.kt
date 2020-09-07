@@ -32,4 +32,6 @@ interface ApiService {
         @Query("api_key") apiKey: String
     ): MovieResponse
 
+    @GET("now_playing")
+    suspend fun getNowPlayingVideo(@Query("api_key") apiKey: String): MovieResponse
 }

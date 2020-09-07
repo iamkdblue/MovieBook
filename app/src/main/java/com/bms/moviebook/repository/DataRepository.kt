@@ -20,5 +20,9 @@ class DataRepository @Inject constructor(private val apiService: ApiService) {
     suspend fun getSimilarMovie(apiKey: String, movieId: Int) =
         flow { emit(apiService.getSimilarMovie(movieId, apiKey)) }
 
+    suspend fun getNowPlayingVideo(apiKey: String) = flow {
+        emit(apiService.getNowPlayingVideo(apiKey))
+    }
+
 
 }

@@ -20,7 +20,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
         android:layout_height="match_parent"
         tools:context=".ui.search.SearchFragment">
 
@@ -37,20 +36,6 @@
             app:poster_url="@{Global.BASE_URL_FOR_MOVIE_POSTER+item.backdropPath}"
             app:srcCompat="@drawable/dummy_poster" />
 
-        <ImageView
-            android:id="@+id/ivPoster"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_120sdp"
-            android:elevation="@dimen/_2sdp"
-            android:scaleType="centerCrop"
-            android:transitionName="ivPoster"
-            app:layout_constraintBottom_toTopOf="@id/materialCard"
-            app:layout_constraintDimensionRatio="2:3"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintTop_toTopOf="@id/materialCard"
-            app:poster_url="@{Global.BASE_URL_FOR_MOVIE_POSTER+item.posterPath}"
-            app:srcCompat="@drawable/dummy_img"
-            tools:src="@drawable/dummy_img" />
 
         <Space
             android:id="@+id/space"
@@ -88,17 +73,17 @@
 
 
                     <TextView
-                        android:textStyle="bold"
                         android:id="@+id/tvMovieName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
                         android:layout_marginTop="@dimen/_4sdp"
-                        app:layout_constraintEnd_toEndOf="@id/glEndInner"
                         android:padding="@dimen/_4sdp"
                         android:text="@{item.title}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         android:textColor="@color/orange"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/glEndInner"
                         app:layout_constraintStart_toStartOf="@id/glHorizontalCenterGuideline"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Movie Name Money Heist" />
@@ -215,6 +200,34 @@
             </ScrollView>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_4sdp"
+            app:layout_constraintBottom_toTopOf="@id/materialCard"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toTopOf="@id/materialCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivPoster"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:scaleType="fitXY"
+                    android:transitionName="ivPoster"
+                    app:layout_constraintDimensionRatio="2:3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:poster_url="@{Global.BASE_URL_FOR_MOVIE_POSTER+item.posterPath}"
+                    app:srcCompat="@drawable/dummy_img"
+                    tools:src="@drawable/dummy_img" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glStart"
