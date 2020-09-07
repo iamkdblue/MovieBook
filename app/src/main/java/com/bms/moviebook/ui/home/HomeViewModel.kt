@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.kalaa.data.repository.DataRepository
-import com.bms.moviebook.model.popular.PopularVideoResponse
+import com.bms.moviebook.model.popular.MovieResponse
 import com.bms.moviebook.util.Global
 import com.bms.moviebook.util.Resource
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,7 @@ class HomeViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     val videoResponse =
-        MutableLiveData<Resource<MutableList<MutableList<PopularVideoResponse.Result>>>>()
+        MutableLiveData<Resource<MutableList<MutableList<MovieResponse.Result>>>>()
 
     init {
         getPopularVideoAndTopRatedVideo()
@@ -34,11 +34,11 @@ class HomeViewModel @ViewModelInject constructor(
 
         /*its runs on the main thread*/
         viewModelScope.launch {
-            dataRepository.getPopularVideo(Global.apiKey, 1)
-                .zip(dataRepository.getTopRatedVideo(Global.apiKey, 1))
+            dataRepository.getPopularVideo(Global.API_KEY, 1)
+                .zip(dataRepository.getTopRatedVideo(Global.API_KEY, 1))
                 { poplarVideo, topRatedVideo ->
                     //val videosList = ArrayList<PopularVideoResponse.Result>()
-                    val videosList = mutableListOf<MutableList<PopularVideoResponse.Result>>()
+                    val videosList = mutableListOf<MutableList<MovieResponse.Result>>()
                     videosList.add(poplarVideo.results.toMutableList())
                     videosList.add(topRatedVideo.results.toMutableList())
                     return@zip videosList

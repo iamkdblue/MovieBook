@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="com.bms.moviebook.util.Global" />
+
+        <variable
+            name="viewModel"
+            type="com.bms.moviebook.ui.details.MovieDetailViewModel" />
+
+        <variable
+            name="item"
+            type="com.bms.moviebook.model.popular.MovieResponse.Result" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.search.SearchFragment">
+
+        <ImageView
+            android:id="@+id/ivBanner"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:transitionName="ivBanner"
+            app:layout_constraintDimensionRatio="3:2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:poster_url="@{Global.BASE_URL_FOR_MOVIE_POSTER+item.backdropPath}"
+            app:srcCompat="@drawable/dummy_poster" />
+
+        <ImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_120sdp"
+            android:elevation="@dimen/_2sdp"
+            android:scaleType="centerCrop"
+            android:transitionName="ivPoster"
+            app:layout_constraintBottom_toTopOf="@id/materialCard"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toTopOf="@id/materialCard"
+            app:poster_url="@{Global.BASE_URL_FOR_MOVIE_POSTER+item.posterPath}"
+            app:srcCompat="@drawable/dummy_img"
+            tools:src="@drawable/dummy_img" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBanner"
+            app:layout_constraintEnd_toEndOf="@+id/ivBanner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/ivBanner"
+            app:layout_constraintTop_toTopOf="@+id/ivBanner"
+            app:layout_constraintVertical_bias="0.9" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCard"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space"
+            tools:background="@drawable/home_card_rounded_corners">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/glHorizontalCenterGuideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent=".35" />
+
+
+                    <TextView
+                        android:id="@+id/tvMovieName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:padding="@dimen/_4sdp"
+                        android:text="@{item.originalTitle}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        app:layout_constraintStart_toStartOf="@id/glHorizontalCenterGuideline"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Movie Name" />
+
+                    <TextView
+                        android:id="@+id/tvInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:padding="@dimen/_4sdp"
+                        android:text="@{item.releaseDate+` |`}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        app:layout_constraintStart_toStartOf="@id/glHorizontalCenterGuideline"
+                        app:layout_constraintTop_toBottomOf="@id/tvMovieName"
+                        tools:text="2017  |" />
+
+                    <androidx.appcompat.widget.AppCompatRatingBar
+                        style="@style/RatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clickable="false"
+                        android:max="5"
+                        android:numStars="5"
+                        android:progressTint="@color/rating_activated"
+                        android:rating="@{item.voteAverage/2}"
+                        android:secondaryProgressTint="@android:color/transparent"
+                        android:stepSize="0.1"
+                        app:layout_constraintBottom_toBottomOf="@id/tvInfo"
+                        app:layout_constraintStart_toEndOf="@id/tvInfo"
+                        app:layout_constraintTop_toTopOf="@id/tvInfo"
+                        tools:rating="2" />
+
+                    <TextView
+                        android:id="@+id/tvOverview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:padding="@dimen/_8sdp"
+                        android:text="@{item.overview}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        app:layout_constraintEnd_toEndOf="@id/glEndInner"
+                        app:layout_constraintStart_toStartOf="@id/glStartInner"
+                        app:layout_constraintTop_toBottomOf="@id/tvInfo"
+                        tools:text="Professor Gabriel Emerson finally learns the truth about Julia Mitchell's identity, but his realization comes a moment too late. Julia is done waiting for the well-respected Dante specialist to remember her and wants nothing more to do with him. Can Gabriel win back her heart before she finds love in another's arms?" />
+
+                    <TextView
+                        android:id="@+id/tvCast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:padding="@dimen/_4sdp"
+                        android:text="Cast"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        app:layout_constraintStart_toStartOf="@id/glStartInner"
+                        app:layout_constraintTop_toBottomOf="@id/tvOverview" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCast"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="@id/glEndInner"
+                        app:layout_constraintStart_toStartOf="@id/glStartInner"
+                        app:layout_constraintTop_toBottomOf="@id/tvCast"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/item_cast" />
+
+                    <TextView
+                        android:id="@+id/tvSimilarMovies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:padding="@dimen/_4sdp"
+                        android:text="Similar Movies"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:visibility="@{viewModel.isSimilarMovieEmpty ? View.GONE : View.VISIBLE }"
+                        app:layout_constraintStart_toStartOf="@id/glStartInner"
+                        app:layout_constraintTop_toBottomOf="@id/rvCast" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvSimilarMovies"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="@id/glEndInner"
+                        app:layout_constraintStart_toStartOf="@id/glStartInner"
+                        app:layout_constraintTop_toBottomOf="@id/tvSimilarMovies"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/item_home_video" />
+
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/glStartInner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="@dimen/_16sdp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/glEndInner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="@dimen/_16sdp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/_16sdp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/_16sdp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

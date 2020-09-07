@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.bms.moviebook.R
 import com.bms.moviebook.databinding.HomeFragmentBinding
 import com.bms.moviebook.util.Status
@@ -43,7 +44,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun initListeners() {
+        binding.ivSearch.setOnClickListener { view ->
+            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
 
+        binding.etSearch.setOnClickListener { view ->
+            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
     }
 
     private fun initObserver() {

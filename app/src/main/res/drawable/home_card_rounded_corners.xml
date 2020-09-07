@@ -4,7 +4,7 @@
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"
         android:radius="1dp"
-        android:topLeftRadius="20dp"
-        android:topRightRadius="20dp" />
+        android:topLeftRadius="24dp"
+        android:topRightRadius="24dp" />
     <solid android:color="@color/card_background" />
 </shape>

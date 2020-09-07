@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bms.moviebook.databinding.ItemHomeVideoListBinding
-import com.bms.moviebook.model.popular.PopularVideoResponse
+import com.bms.moviebook.model.popular.MovieResponse
 
 class HomeMovieListAdapter() : RecyclerView.Adapter<HomeMovieListAdapter.ViewHolder>() {
 
-    var videosList: MutableList<MutableList<PopularVideoResponse.Result>> = mutableListOf()
+    var videosList: MutableList<MutableList<MovieResponse.Result>> = mutableListOf()
     private lateinit var homeMovieAdapter: HomeMovieAdapter
     private var titles = arrayOf<String>("Popular Movies", "Top Rated Movies")
 
@@ -27,7 +27,7 @@ class HomeMovieListAdapter() : RecyclerView.Adapter<HomeMovieListAdapter.ViewHol
         holder.bind(position)
     }
 
-    fun setData(videosList: MutableList<MutableList<PopularVideoResponse.Result>>) {
+    fun setData(videosList: MutableList<MutableList<MovieResponse.Result>>) {
         this.videosList = videosList
     }
 
@@ -36,7 +36,6 @@ class HomeMovieListAdapter() : RecyclerView.Adapter<HomeMovieListAdapter.ViewHol
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
-            //binding.videos = videosList[position]
             homeMovieAdapter = HomeMovieAdapter()
             homeMovieAdapter.setData(videosList[position])
             binding.tvHeading.text = titles[position]

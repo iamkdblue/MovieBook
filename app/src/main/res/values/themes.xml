@@ -13,8 +13,12 @@
 
     <style name="RatingBar"
         parent="Widget.AppCompat.RatingBar.Small">
-        <item name="colorControlNormal">@color/rating_normal</item>
+        <item name="colorAccent">@color/rating_normal</item>
         <item name="colorControlActivated">@color/rating_activated</item>
     </style>
 
+    <style name="RoundedImageViewShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

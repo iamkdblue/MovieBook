@@ -1,21 +1,25 @@
 package com.bms.moviebook.model.popular
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import kotlinx.android.parcel.Parcelize
 
 @Keep
-data class PopularVideoResponse(
+@Parcelize
+data class MovieResponse(
     @SerializedName("page")
     val page: Int = 0,
     @SerializedName("results")
-    val results: List<Result> = listOf(),
+    val results: MutableList<Result> = mutableListOf(),
     @SerializedName("total_pages")
     val totalPages: Int = 0,
     @SerializedName("total_results")
     val totalResults: Int = 0
-) {
+) : Parcelable {
     @Keep
+    @Parcelize
     data class Result(
         @SerializedName("adult")
         val adult: Boolean = false,
@@ -45,5 +49,5 @@ data class PopularVideoResponse(
         val voteAverage: Float = 0f,
         @SerializedName("vote_count")
         val voteCount: Int = 0
-    )
+    ) : Parcelable
 }

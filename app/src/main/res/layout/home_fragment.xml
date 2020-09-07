@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@id/tvHeader">
 
-            <EditText
+            <TextView
                 android:id="@+id/etSearch"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -47,8 +47,7 @@
                 android:hint="Search"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@xml/cursor" />
+                android:textColorHint="@color/white" />
 
 
             <ImageView
@@ -110,12 +109,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/_16sdp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/glBottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_end="@dimen/_16sdp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

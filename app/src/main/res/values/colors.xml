@@ -18,4 +18,13 @@
     <color name="rating_normal">#CDC208</color>
     <color name="rating_activated">#FBD533</color>
 
+    <color name="bottom_nav_color">#828E9A</color>
+    <color name="napier_green">#FFC36A</color>
+    <color name="india_red">#FFBBC3</color>
+    <color name="kellygreen">#D1FFA8</color>
+    <color name="tufs_blue">#ADD4FF</color>
+    <color name="tiffanyblue">#AAFFFB</color>
+    <color name="Sanddtorm">#FFE595</color>
+    <color name="salmonpink_1">#FFB8C1</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

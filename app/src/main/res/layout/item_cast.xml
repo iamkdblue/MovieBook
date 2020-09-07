@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.bms.moviebook.util.Global" />
+
+        <variable
+            name="item"
+            type="com.bms.moviebook.model.cast.CastResponse.Cast" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_4sdp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivCast"
+            android:layout_width="@dimen/_64sdp"
+            android:layout_height="@dimen/_64sdp"
+            android:padding="1dp"
+            app:cast_url="@{Global.BASE_URL_FOR_MOVIE_POSTER+item.profilePath}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundedImageViewShape"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/tvActress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_1sdp"
+            android:singleLine="true"
+            android:text="@{item.gender==1 ? `Actress` : `Actor`}"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="@id/ivCast"
+            app:layout_constraintStart_toStartOf="@id/ivCast"
+            app:layout_constraintTop_toBottomOf="@id/ivCast"
+            tools:text="Actress" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_1sdp"
+            android:singleLine="true"
+            android:text="@{item.name}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="@id/ivCast"
+            app:layout_constraintStart_toStartOf="@id/ivCast"
+            app:layout_constraintTop_toBottomOf="@id/tvActress"
+            tools:text="El Professor Ser" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
