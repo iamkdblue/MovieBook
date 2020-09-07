@@ -1,4 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MovieBook</string>
     <string name="searchbar_hint">Search Movie Here</string>
+    <string name="header_message">Hello,What do you &#10; want to watch ?</string>
+    <string name="search">Search</string>
 </resources>

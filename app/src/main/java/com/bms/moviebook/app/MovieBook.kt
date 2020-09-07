@@ -1,4 +1,4 @@
-package com.bms.moviebook
+package com.bms.moviebook.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

@@ -42,7 +42,6 @@ class HomeMovieAdapter() : RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemHomeVideoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var navController: NavController? = null
 
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         fun bind(position: Int) {
@@ -62,7 +61,6 @@ class HomeMovieAdapter() : RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
                 )
 
                 /*if (navController!!.currentDestination?.id == R.id.homeFragment) {
-
 
                 } else {
                     val bundle = bundleOf("movie" to videosList[position])
