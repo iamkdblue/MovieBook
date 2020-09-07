@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
                     binding.rvMovies.adapter = homeMovieListAdapter
                 }
                 Status.LOADING -> {
-                    requireContext().toast("LOADING")
+                    //requireContext().toast("LOADING")
                 }
                 Status.ERROR -> {
                     requireContext().toast(it.message.toString())

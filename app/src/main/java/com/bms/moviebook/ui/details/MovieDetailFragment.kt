@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.bms.moviebook.R
 import com.bms.moviebook.databinding.MovieDetailFragmentBinding
@@ -25,6 +26,7 @@ class MovieDetailFragment : Fragment() {
     private lateinit var binding: MovieDetailFragmentBinding
     private lateinit var castAdapter: CastAdapter
     private lateinit var homeMovieAdapter: HomeMovieAdapter
+    private val args: MovieDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +48,6 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initViews()
         initListeners()
         initObserver()
@@ -54,8 +55,12 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun initViews() {
+        binding.viewModel = viewModel
+        binding.item = args.movie
         binding.materialCard.setBackgroundResource(R.drawable.home_card_rounded_corners)
-        binding.item = movie
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            binding.ivPoster.transitionName = args.id
+        }
     }
 
     private fun initListeners() {
@@ -75,7 +80,7 @@ class MovieDetailFragment : Fragment() {
                     binding.rvCast.adapter = castAdapter
                 }
                 Status.LOADING -> {
-                    requireContext().toast("LOADING")
+                    //requireContext().toast("LOADING")
                 }
                 Status.ERROR -> {
                     requireContext().toast(it.message.toString())
@@ -91,7 +96,7 @@ class MovieDetailFragment : Fragment() {
                     binding.rvSimilarMovies.adapter = homeMovieAdapter
                 }
                 Status.LOADING -> {
-                    requireContext().toast("LOADING")
+                    //requireContext().toast("LOADING")
                 }
                 Status.ERROR -> {
                     requireContext().toast(it.message.toString())

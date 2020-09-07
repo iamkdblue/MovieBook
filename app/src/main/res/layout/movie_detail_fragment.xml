@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <import type="com.bms.moviebook.util.Global" />
 
         <variable
@@ -18,6 +20,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_height="match_parent"
         tools:context=".ui.search.SearchFragment">
 
@@ -85,17 +88,20 @@
 
 
                     <TextView
+                        android:textStyle="bold"
                         android:id="@+id/tvMovieName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
                         android:layout_marginTop="@dimen/_4sdp"
+                        app:layout_constraintEnd_toEndOf="@id/glEndInner"
                         android:padding="@dimen/_4sdp"
-                        android:text="@{item.originalTitle}"
+                        android:text="@{item.title}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/orange"
                         app:layout_constraintStart_toStartOf="@id/glHorizontalCenterGuideline"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Movie Name" />
+                        tools:text="Movie Name Money Heist" />
 
                     <TextView
                         android:id="@+id/tvInfo"
@@ -148,6 +154,7 @@
                         android:padding="@dimen/_4sdp"
                         android:text="Cast"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/orange"
                         app:layout_constraintStart_toStartOf="@id/glStartInner"
                         app:layout_constraintTop_toBottomOf="@id/tvOverview" />
 
@@ -171,6 +178,7 @@
                         android:padding="@dimen/_4sdp"
                         android:text="Similar Movies"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/orange"
                         android:visibility="@{viewModel.isSimilarMovieEmpty ? View.GONE : View.VISIBLE }"
                         app:layout_constraintStart_toStartOf="@id/glStartInner"
                         app:layout_constraintTop_toBottomOf="@id/rvCast" />

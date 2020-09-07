@@ -1,7 +1,9 @@
 package com.bms.moviebook.ui.home
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -42,16 +44,35 @@ class HomeMovieAdapter() : RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         var navController: NavController? = null
 
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         fun bind(position: Int) {
             binding.item = videosList[position]
+            binding.ivPoster.transitionName = videosList[position].id.toString()
 
             binding.root.setOnClickListener { view ->
 
                 val extras = FragmentNavigatorExtras(
-                    binding.ivPoster to "ivPoster"
+                    binding.ivPoster to videosList[position].id.toString()
                 )
-                val bundle = bundleOf("movie" to videosList[position])
-                view.findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle, null, extras)
+                val action = HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(id=videosList[position].id.toString(),movie=videosList[position])
+
+                view.findNavController().navigate(
+                    action,
+                    extras
+                )
+
+                /*if (navController!!.currentDestination?.id == R.id.homeFragment) {
+
+
+                } else {
+                    val bundle = bundleOf("movie" to videosList[position])
+                    view.findNavController().navigate(
+                        R.id.action_movieDetailFragment_self,
+                        bundle,
+                        null,
+                        extras
+                    )
+                }*/
 
             }
         }
