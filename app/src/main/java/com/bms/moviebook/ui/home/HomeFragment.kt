@@ -80,6 +80,8 @@ class HomeFragment : Fragment(), HomeMovieAdapter.OnRecyclerViewItemClick {
         })
     }
 
+
+    /*its event called when nested recyclerview it clicked in HomeFragment*/
     override fun onItemClick(
         movie: MovieResponse.Result,
         binding: ItemHomeVideoBinding,

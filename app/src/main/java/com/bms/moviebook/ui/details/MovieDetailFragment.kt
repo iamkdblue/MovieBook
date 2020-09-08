@@ -109,6 +109,7 @@ class MovieDetailFragment : Fragment(), HomeMovieAdapter.OnRecyclerViewItemClick
         })
     }
 
+    /*here i am opening self fragment for show movie detail*/
     override fun onItemClick(
         movie: MovieResponse.Result,
         binding: ItemHomeVideoBinding,
