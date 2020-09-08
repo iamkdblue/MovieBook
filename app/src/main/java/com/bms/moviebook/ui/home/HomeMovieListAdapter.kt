@@ -11,6 +11,7 @@ class HomeMovieListAdapter() : RecyclerView.Adapter<HomeMovieListAdapter.ViewHol
     var videosList: MutableList<MutableList<MovieResponse.Result>> = mutableListOf()
     private lateinit var homeMovieAdapter: HomeMovieAdapter
     private var titles = arrayOf<String>("Popular Movies", "Top Rated Movies")
+    private var onRecyclerViewItemClick: HomeMovieAdapter.OnRecyclerViewItemClick? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,6 +32,10 @@ class HomeMovieListAdapter() : RecyclerView.Adapter<HomeMovieListAdapter.ViewHol
         this.videosList = videosList
     }
 
+    fun setOnnRecyclerViewItemClick(onnRecyclerViewItemClick: HomeMovieAdapter.OnRecyclerViewItemClick) {
+        this.onRecyclerViewItemClick = onnRecyclerViewItemClick
+    }
+
 
     inner class ViewHolder(private val binding: ItemHomeVideoListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -38,6 +43,7 @@ class HomeMovieListAdapter() : RecyclerView.Adapter<HomeMovieListAdapter.ViewHol
         fun bind(position: Int) {
             homeMovieAdapter = HomeMovieAdapter()
             homeMovieAdapter.setData(videosList[position])
+            homeMovieAdapter.setOnnRecyclerViewItemClick(onRecyclerViewItemClick)
             binding.tvHeading.text = titles[position]
             binding.rvItemList.adapter = homeMovieAdapter
         }

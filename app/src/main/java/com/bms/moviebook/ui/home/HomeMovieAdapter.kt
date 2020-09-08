@@ -4,12 +4,9 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
-import com.bms.moviebook.R
 import com.bms.moviebook.databinding.ItemHomeVideoBinding
 import com.bms.moviebook.model.popular.MovieResponse
 
@@ -18,6 +15,7 @@ class HomeMovieAdapter() : RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
 
     var videosList: List<MovieResponse.Result> = ArrayList()
     private var titles = arrayOf<String>("Popular Movies", "Top Rated")
+    private var onRecyclerViewItemClick: OnRecyclerViewItemClick? = null
 
 
     override fun onCreateViewHolder(
@@ -39,6 +37,18 @@ class HomeMovieAdapter() : RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
         this.videosList = videosList
     }
 
+    interface OnRecyclerViewItemClick {
+        fun onItemClick(
+            model: MovieResponse.Result,
+            binding: ItemHomeVideoBinding,
+            position: Int
+        )
+    }
+
+    fun setOnnRecyclerViewItemClick(onnRecyclerViewItemClick: OnRecyclerViewItemClick?) {
+        onRecyclerViewItemClick = onnRecyclerViewItemClick
+    }
+
 
     inner class ViewHolder(private val binding: ItemHomeVideoBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -49,16 +59,22 @@ class HomeMovieAdapter() : RecyclerView.Adapter<HomeMovieAdapter.ViewHolder>() {
             binding.ivPoster.transitionName = videosList[position].id.toString()
 
             binding.root.setOnClickListener { view ->
+                onRecyclerViewItemClick!!.onItemClick(videosList[position], binding, position)
+
+               /* onRecyclerViewItemClick!!.onItemClick(videosList[position], binding, position)
 
                 val extras = FragmentNavigatorExtras(
                     binding.ivPoster to videosList[position].id.toString()
                 )
-                val action = HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(id=videosList[position].id.toString(),movie=videosList[position])
+                val action = HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+                    id = videosList[position].id.toString(),
+                    movie = videosList[position]
+                )
 
                 view.findNavController().navigate(
                     action,
                     extras
-                )
+                )*/
 
                 /*if (navController!!.currentDestination?.id == R.id.homeFragment) {
 

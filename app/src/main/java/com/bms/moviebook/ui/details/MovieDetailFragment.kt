@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.OnApplyWindowInsetsListener
-import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.bms.moviebook.R
+import com.bms.moviebook.databinding.ItemHomeVideoBinding
 import com.bms.moviebook.databinding.MovieDetailFragmentBinding
 import com.bms.moviebook.model.popular.MovieResponse
 import com.bms.moviebook.ui.home.HomeMovieAdapter
@@ -21,7 +22,7 @@ import com.bms.moviebook.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MovieDetailFragment : Fragment() {
+class MovieDetailFragment : Fragment(), HomeMovieAdapter.OnRecyclerViewItemClick {
 
     private val viewModel: MovieDetailViewModel by viewModels()
     private lateinit var movie: MovieResponse.Result
@@ -57,7 +58,6 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun initViews() {
-
         binding.viewModel = viewModel
         binding.item = args.movie
         binding.materialCard.setBackgroundResource(R.drawable.home_card_rounded_corners)
@@ -95,6 +95,7 @@ class MovieDetailFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     homeMovieAdapter = HomeMovieAdapter()
+                    homeMovieAdapter.setOnnRecyclerViewItemClick(this)
                     homeMovieAdapter.setData(it.data!!)
                     binding.rvSimilarMovies.adapter = homeMovieAdapter
                 }
@@ -106,6 +107,29 @@ class MovieDetailFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onItemClick(
+        movie: MovieResponse.Result,
+        binding: ItemHomeVideoBinding,
+        position: Int
+    ) {
+        //this.binding.viewModel = viewModel
+        /*binding.item = movie
+        viewModel.getMovieCredit(movieId = movie.id)
+        viewModel.getSimilarMovie(movieId = movie.id)*/
+        val extras = FragmentNavigatorExtras(
+            binding.ivPoster to movie.id.toString()
+        )
+        val action = MovieDetailFragmentDirections.actionMovieDetailFragmentSelf(
+            id = movie.id.toString(),
+            movie = movie
+        )
+
+        findNavController().navigate(
+            action,
+            extras
+        )
     }
 
 }

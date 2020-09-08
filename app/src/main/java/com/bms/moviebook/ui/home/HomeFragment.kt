@@ -9,14 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.bms.moviebook.R
 import com.bms.moviebook.databinding.HomeFragmentBinding
+import com.bms.moviebook.databinding.ItemHomeVideoBinding
+import com.bms.moviebook.model.popular.MovieResponse
 import com.bms.moviebook.util.Status
 import com.bms.moviebook.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeMovieAdapter.OnRecyclerViewItemClick {
 
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: HomeFragmentBinding
@@ -62,16 +66,36 @@ class HomeFragment : Fragment() {
                     binding.pbLoading.visibility = View.GONE
                     homeMovieListAdapter = HomeMovieListAdapter()
                     homeMovieListAdapter.setData(it.data!!)
+                    homeMovieListAdapter.setOnnRecyclerViewItemClick(this)
                     binding.rvMovies.adapter = homeMovieListAdapter
                 }
                 Status.LOADING -> {
                     binding.pbLoading.visibility = View.VISIBLE
                 }
                 Status.ERROR -> {
-                    binding.pbLoading.visibility = View.VISIBLE
+                    binding.pbLoading.visibility = View.GONE
                     requireContext().toast(it.message.toString())
                 }
             }
         })
+    }
+
+    override fun onItemClick(
+        movie: MovieResponse.Result,
+        binding: ItemHomeVideoBinding,
+        position: Int
+    ) {
+        val extras = FragmentNavigatorExtras(
+            binding.ivPoster to movie.id.toString()
+        )
+        val action = HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+            id = movie.id.toString(),
+            movie = movie
+        )
+
+        findNavController().navigate(
+            action,
+            extras
+        )
     }
 }
