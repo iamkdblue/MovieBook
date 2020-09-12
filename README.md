@@ -6,7 +6,7 @@
 ## Preview
 <table style="width:100%">
   <tr>
-    <th>Joke App</th>
+    <th>MovieBook App</th>
   </tr>
   <tr>
     <td><img src="art/demo.gif"/></td>
